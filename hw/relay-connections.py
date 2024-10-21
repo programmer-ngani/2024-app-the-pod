@@ -18,10 +18,10 @@ Table 2. DC Motor Connection to Relay Module
 Relay		Jumper	Chassis		Cable	DC
 Module		Wire	DC Jack		DC Plug	Motor
 CH-1	NC-1	JW-A2				
-	COM-1		JP-1		PP-1	M-F
+	COM-1		JP-3		PP-3	M-F
 	NO-1	JW-A1				
 CH-2	NC-2	JW-A1				
-	COM-2		JG-1		PG-1	M-R
+	COM-2		JG-3		PG-3	M-R
 	NO-2	JW-A2				
 CH-3	NC-3	JW-A2				
 	COM-3	JW-A2				
@@ -83,16 +83,22 @@ Table 8. Summary List of Jack and Plug Connections
 
 Chassis	Cable	Description		
 DC Jack	DC Plug			
+
 JP-A	PP-A	For first 12V DC Supply.		
 JG-A	PG-A			
+
 JP-B	PP-B	For second 12V DC Supply.		
 JG-B	PG-B			
+
 JP-C	PP-C	For third 12V DC Supply.		
 JG-C	PG-C			
-JP-1	PP-1	For DC Motor pins.		
-JG-1	PG-1			
+
+JP-3	PP-3	For DC Motor pins.		
+JG-3	PG-3			
+
 JP-4	PP-4	For Solenoid Lock pins.		
 JG-4	PG-4			
+
 JP-5	PP-5	For LED Bar pins.		
 JG-5	PG-5			
 
