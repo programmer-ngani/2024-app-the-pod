@@ -49,7 +49,7 @@ CH-4	NC-4	JW-B1	JP-B
 		JW-4	JG-4		PG-4	SL-GND
 
 
-Table 5. LED Bar Power Supply Connection to Relay Module
+Table 5. LED Bar (Internal and External) Power Supply Connection to Relay Module
 
 Relay		Jumper	Chassis		Cable	Power
 Module		Wire	DC Jack		DC Plug	Supply
@@ -57,17 +57,26 @@ CH-5	NC-5	JW-C1	JP-C		PP-C	VCC-C
 	COM-5	JW-C1				
 	NO-5					
 			JG-C		PG-C	GND-C
+CH-6	NC-6	JW-C1				
+	COM-6	JW-C1				
+	NO-6					
 
 
-Table 6. LED Bar Connection to Relay Module
+Table 6. LED Bar (Internal and External) Connection to Relay Module
 
 Relay		Jumper	Chassis		Cable	LED
-Module		Wire	DC Jack		DC Plug	Bar
+Module		Wire	DC Jack		DC Plug	Bar (Int)
 CH-5	NC-5	JW-C1	JP-C			
 	COM-5	JW-C1				
-	NO-5		JP-5		PP-5	LB-VCC
+	NO-5		JP-5		PP-5	LBI-VCC
 		JW-5	JG-C			
-		JW-5	JG-5		PG-5	LB-GND
+		JW-5	JG-5		PG-5	LBI-GND
+					Cable	LED
+					DC Plug	Bar (Ext)
+CH-6	NC-6	JW-C1				
+	COM-6	JW-C1				
+	NO-6		JP-6		PP-6	LBE-VCC
+		JW-5	JG-6		PG-6	LBE-GND
 
 
 Table 7. Legend for Table 1 to Table  6
@@ -83,22 +92,17 @@ Table 8. Summary List of Jack and Plug Connections
 
 Chassis	Cable	Description		
 DC Jack	DC Plug			
-
-JP-A	PP-A	For first 12V DC Supply.		
-JG-A	PG-A			
-
-JP-B	PP-B	For second 12V DC Supply.		
-JG-B	PG-B			
-
-JP-C	PP-C	For third 12V DC Supply.		
-JG-C	PG-C			
-
-JP-3	PP-3	For DC Motor pins.		
-JG-3	PG-3			
-
-JP-4	PP-4	For Solenoid Lock pins.		
-JG-4	PG-4			
-
-JP-5	PP-5	For LED Bar pins.		
-JG-5	PG-5			
-
+JP-A	PP-A	For first 12V DC Supply (VCC).		
+JG-A	PG-A	For first 12V DC Supply (GND).		
+JP-B	PP-B	For second 12V DC Supply (VCC).		
+JG-B	PG-B	For second 12V DC Supply (GND).		
+JP-C	PP-C	For third 12V DC Supply (VCC).		
+JG-C	PG-C	For third 12V DC Supply (GND).		
+JP-1	PP-1	For DC Motor pin (F).		
+JG-1	PG-1	For DC Motor pin (R).		
+JP-4	PP-4	For Solenoid Lock pin (VCC).		
+JG-4	PG-4	For Solenoid Lock pin (GND).		
+JP-5	PP-5	For LED Bar (Internal) pin (VCC).		
+JG-5	PG-5	For LED Bar (Internal) pin (GND).		
+JP-6	PP-6	For LED Bar (External) pin (VCC).		
+JG-6	PG-6	For LED Bar (External) pin (GND).		
