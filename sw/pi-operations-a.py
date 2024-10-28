@@ -1,8 +1,7 @@
-Remote Access for Raspberry Pi (Zero W, Zero 2W, 3 to 5)
+A. Headless Remote Access for Raspberry Pi (Zero W, Zero 2W, 3 to 5)
 
 Pre-requisite:
-1) Raspberry pi was previously connected to the network.
-2) SSH was enabled.
+Raspberry Pi connected to a wireless network with SSH enabled.
 
 Steps:
 1) Scan network.
@@ -22,4 +21,4 @@ Steps:
 3.4) sudo nano <filename.extension> for editing or creating a file
 
 Next:
-Control a GPIO pin to Blink an LED.
+B. Control a GPIO pin to Blink an LED.
