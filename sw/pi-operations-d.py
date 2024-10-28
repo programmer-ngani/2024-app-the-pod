@@ -1,7 +1,9 @@
-Control a Relay Module using Raspberry Pi
+D. Control a Relay Module using Raspberry Pi
 
 Pre-requisite:
-1) Monitor an Input Switch to Control an LED.
+A. Headless Remote Access for Raspberry Pi (Zero W, Zero 2W, 3 to 5)
+B. Control a GPIO pin to Blink an LED.
+C. Monitor an Input Switch to Control an LED.
 
 Steps:
 8) Use Terminal Commands
@@ -62,4 +64,4 @@ while True:
 10.3) Type <Y> of <N> to save or cancel.
 
 Next:
-Raspberry Pi Pico Setup
+E. Raspberry Pi Pico Setup
