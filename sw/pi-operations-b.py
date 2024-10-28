@@ -1,7 +1,7 @@
-Control a GPIO pin to Blink an LED.
+B. Control a GPIO pin to Blink an LED.
 
 Pre-requisite:
-1) Remote Access for Raspberry Pi (Zero W, Zero 2W, 3 to 5).
+A. Headless Remote Access for Raspberry Pi (Zero W, Zero 2W, 3 to 5)
 
 Steps:
 4) Use Terminal Commands
@@ -29,4 +29,4 @@ while True: # Run forever
 5.3) Type <Y> of <N> to save or cancel.
 
 Next:
-Monitor an Input Switch to Control an LED.
+C. Monitor an Input Switch to Control an LED.
