@@ -31,7 +31,7 @@ MY_DEVICE_UID = "mduid-2"
 2.2) Using IP Scanner, scan network to discover devices.
 2.2.1) Connected devices and IP Address will be shown.
 3) Remote Access Zero (Headless)
-3.1) Using Termius, type
+3.1) Using Termius, enter
 ssh pi@ip-address -p 22
 # ip-address from result of IP Scanner
 3.2) SSH settings in Termius or Putty,
@@ -39,11 +39,11 @@ username: pi
 password: raspberry
 hostname: ip-address
 port: 22
-3.3) Configure TigerVNC on Zero, type
+# Read for TigerVNC: picockpit.com/raspberry-pi/tigervnc-and-realvnc-on-raspberry-pi-bookworm-os/ 
+3.3) Configure TigerVNC on Zero, enter
 sudo apt update && sudo apt upgrade
 sudo apt install tigervnc-standalone-server
-# ref: https://picockpit.com/raspberry-pi/tigervnc-and-realvnc-on-raspberry-pi-bookworm-os/
-3.4) Edit settings, type
+3.4) Edit settings, enter
 sudo nano /etc/tigervnc/vncserver-config-mandatory
 3.4.1) Find and change content to:
 # $localhost should the TigerVNC server only listen on localhost for
@@ -51,15 +51,23 @@ sudo nano /etc/tigervnc/vncserver-config-mandatory
 #
 # $localhost = "yes";
 $localhost = "no";
-3.5) In another device (computer), open TigerVNC.
+3.4.2) Press CTRL+X, then Y, to save.
+3.4.3) Set password, enter
+sudo tigervncpasswd
+3.4.4) Set view-only password, type n.
+3.4.5) Run, enter
+tigervncserver
+3.4.6) Get the server port (typically something like 5901).
+3.5) In another device (computer), download, install, and open TigerVNC.
 3.5.1) Type in vncserver:
 ip-address:5901
 # ip-address from result of IP Scanner
 3.5.2) Desktop of Raspberry Pi will be shown.
-3.5.3) If not successful, proceed to NMCLI.
+3.5.3) If not successful, skip.
 3.5.4) To disconnect tigervnc, press:
 ALT+F8
-4) Connecting Zero to a new network.
+# Read for NMCLI: jeffgeerling.com/blog/2023/nmcli-wifi-on-raspberry-pi-os-12-bookworm
+4) Using nmcli, connecting Zero to a new network.
 4.1) Turn off Zero.
 4.2) Turn on new network (wireless router).
 4.3) Connect device (laptop) on previous network.
@@ -67,7 +75,7 @@ ALT+F8
 4.5) Remote access Zero using Termius.
 4.6) Using nmcli command in Termius,
 4.6.1) Type the following:
-# TO-DO: add code here
+sudo nmcli d wifi connect "new_wifi_ssid_here" password "new_wifi_password_here" ifname wlan0
 4.6.2) Exit Termius.
 4.7) Connect device (laptop) on new network.
 4.8) Scan network to discover devices.
@@ -97,16 +105,3 @@ sudo nano <filename.extension>
 sudo reboot
 # For shutdown
 sudo shutdown -h now
-
-B. User Guide for Owner
-0) The whole system is powered off.
-1) First, turn on the wireless router (network).
-2) Then, turn on the Raspberry Pi Pico W one-by-one.
-2.1) LED is on after startup.
-2.2) LED is off once connected to network.
-3) Lastly, turn on the Raspberry Pi Zero 2W.
-3.1) LED is blinking after startup.
-3.2) LED is on once connected to network.
-
-C. User Guide for Customer
-0) Download and install the Android Application.
