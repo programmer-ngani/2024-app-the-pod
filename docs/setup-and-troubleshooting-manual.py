@@ -1,5 +1,4 @@
-System Configuration
-
+System Configuration:
 A. User Guide for Developer
 0) Download and Install
 0.1) Raspberry Pi Pico Tools (Pico and Pico W)
@@ -40,8 +39,10 @@ password: raspberry
 hostname: ip-address
 port: 22
 # Read for TigerVNC: picockpit.com/raspberry-pi/tigervnc-and-realvnc-on-raspberry-pi-bookworm-os/ 
-3.3) Configure TigerVNC on Zero, enter
+3.3) Configure TigerVNC Module on Zero.
+3.3.1) To update system, enter
 sudo apt update && sudo apt upgrade
+3.3.2) To install module, enter
 sudo apt install tigervnc-standalone-server
 3.4) Edit settings, enter
 sudo nano /etc/tigervnc/vncserver-config-mandatory
@@ -75,7 +76,7 @@ ALT+F8
 4.5) Remote access Zero using Termius.
 4.6) Using nmcli command in Termius,
 4.6.1) Type the following:
-sudo nmcli d wifi connect "new_wifi_ssid_here" password "new_wifi_password_here" ifname wlan0
+sudo nmcli d wifi connect <"new_wifi_ssid_here"> password <"new_wifi_password_here"> ifname wlan0
 4.6.2) Exit Termius.
 4.7) Connect device (laptop) on new network.
 4.8) Scan network to discover devices.
