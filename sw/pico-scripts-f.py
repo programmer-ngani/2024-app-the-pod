@@ -110,12 +110,12 @@ def podControl(request):
         controlCoverValue = request.data["controlCover"]
         if(controlDataValue == "F"):
             print('C1 State:', 'Occupied')
-            controlOutput(controlDataValue, controlCoverValue)
             led_internal.value(1)
+            controlOutput(controlDataValue, controlCoverValue)
         elif(controlDataValue == "T"):
             print('C1 State:', 'Available')
-            controlOutput(controlDataValue, controlCoverValue)
             led_internal.value(0)
+            controlOutput(controlDataValue, controlCoverValue)
         elif(controlDataValue == "X"):
             print('C1 State:', 'Service Mode')
             led_internal.value(0)
@@ -159,13 +159,12 @@ def coverControl(c):
         relay_pin1.value(1)
         relay_pin2.value(1)
         relay_pin3.value(0)
-        while (limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
-            pass
-        print("MSG (4):", "Motor OFF.")
-        relay_pin3.value(1)
-        print("MSG (5):", "Solenoid OFF.")
-        relay_pin4.value(1)
-        print("\tMSG (6):", "Done.")
+        if not (limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
+            print("MSG (4):", "Motor OFF.")
+            relay_pin3.value(1)
+            print("MSG (5):", "Solenoid OFF.")
+            relay_pin4.value(1)
+            print("\tMSG (6):", "Done.")
     elif(c == "REVERSE"):
         print("MSG (1):", "Solenoid ON.")
         relay_pin4.value(0)
@@ -176,15 +175,14 @@ def coverControl(c):
         relay_pin1.value(0)
         relay_pin2.value(0)
         relay_pin3.value(0)
-        while(limit_switch_btm_l.value() == 1 and limit_switch_btm_r.value() == 1):
-            pass
-        print("MSG (4):", "Motor OFF.")
-        relay_pin1.value(1)
-        relay_pin2.value(1)
-        relay_pin3.value(1)
-        print("MSG (5):", "Solenoid OFF.")
-        relay_pin4.value(1)
-        print("\tMSG (6):", "Done.")
+        if not (limit_switch_btm_l.value() == 1 and limit_switch_btm_r.value() == 1):
+            print("MSG (4):", "Motor OFF.")
+            relay_pin1.value(1)
+            relay_pin2.value(1)
+            relay_pin3.value(1)
+            print("MSG (5):", "Solenoid OFF.")
+            relay_pin4.value(1)
+            print("\tMSG (6):", "Done.")
 
 def ledControl(l):
     if(l == "ON"):
