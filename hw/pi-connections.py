@@ -2,7 +2,8 @@ Table 1. Pin Connection of Raspberry Pi (Zero) and Relay Module
 
 Raspberry Pi	Relay
 Board	Label	Module
-17	3.3V	JDVCC
+2	5.0V	JDVCC
+1	3.3V	VCC
 39	GND	GND
 37		IN1
 35		IN2
@@ -41,7 +42,8 @@ Table 4. Pin Connection of Raspberry Pi (Pico) and Relay Module
 
 Raspberry Pi	Relay
 Board	Label	Module
-36	3.3V	JDVCC
+40	5.0V	JDVCC
+36	3.3V	VCC
 38	GND	GND
 21		IN1
 22		IN2
