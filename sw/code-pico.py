@@ -28,6 +28,8 @@ while wlan.status() != 3:
 
 ip = wlan.ifconfig()[0]
 print("\nConnected to IP: ", ip)
+print("\tUsage (POST): ", ip + "/api/set-control-data")
+print("\tBody (JSON): ", "{'controlData': 'X', 'controlCover': 'close', }"
 led_internal.value(0)
 
 def getSensorReading():
