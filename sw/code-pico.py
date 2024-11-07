@@ -15,18 +15,23 @@ MY_DEVICE_UID = "mduid-1"
 led_internal = Pin('LED', Pin.OUT)
 led_internal.value(1)
 
-relay_pin1 = 21
-relay_pin2 = 22
-relay_pin3 = 24
-relay_pin4 = 25
-relay_pin5 = 26
-relay_pin6 = 27
+relay_pin1 = Pin(21, Pin.OUT)
+relay_pin2 = Pin(22, Pin.OUT)
+relay_pin3 = Pin(23, Pin.OUT)
+relay_pin4 = Pin(25, Pin.OUT)
+relay_pin5 = Pin(26, Pin.OUT)
+relay_pin6 = Pin(27, Pin.OUT)
 relay_pin1.value(1)
 relay_pin2.value(1)
 relay_pin3.value(1)
 relay_pin4.value(1)
 relay_pin5.value(1)
 relay_pin6.value(1)
+
+limit_switch_top_l = Pin(9, Pin.IN, Pin.PULL_UP)
+limit_switch_top_r = Pin(10, Pin.IN, Pin.PULL_UP)
+limit_switch_btm_l = Pin(14, Pin.IN, Pin.PULL_UP)
+limit_switch_btm_r = Pin(15, Pin.IN, Pin.PULL_UP)
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -109,10 +114,18 @@ def coverControl(c):
         relay_pin1.value(0)
         relay_pin2.value(1)
         relay_pin3.value(0)
+        while(limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
+            pass
+        relay_pin1.value(1)
+        relay_pin3.value(1)
     elif(c == "REVERSE"):
         print("MSG:", "Motor Reverse.")
         relay_pin1.value(1)
         relay_pin2.value(0)
         relay_pin3.value(0)
+        while(limit_switch_btm_l.value() == 1 and limit_switch_btm_r.value() == 1):
+            pass
+        relay_pin2.value(1)
+        relay_pin3.value(1)
 
 server.run()
