@@ -120,10 +120,9 @@ def podControl(request):
             print('C1 State:', 'Service Mode')
             led_internal.value(0)
             controlOutput(controlDataValue, controlCoverValue)
-        #print("controlDataStatus: ", controlDataValue)
-        return json.dumps({"message" : "Command sent successfully!"}), 200, {"Content-Type": "application/json"}
     except:
         pass
+    return json.dumps({"message" : "Command sent successfully!"}), 200, {"Content-Type": "application/json"}
 
 @server.catchall()
 def catchall(request):
