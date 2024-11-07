@@ -1,3 +1,4 @@
+# Pico Script
 from phew import connect_to_wifi, server
 from machine import Pin
 import network, time, json
@@ -152,6 +153,7 @@ def controlOutput(u, d):
         """
 
 def coverControl(c):
+    global controlCoverResponse
     if(c == "FORWARD"):
         print("MSG (1):", "Solenoid ON.")
         relay_pin4.value(0)
