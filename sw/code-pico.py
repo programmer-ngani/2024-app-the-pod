@@ -29,7 +29,9 @@ while wlan.status() != 3:
 ip = wlan.ifconfig()[0]
 print("\nConnected to IP: ", ip)
 print("\tUsage (POST): ", ip + "/api/set-control-data")
-print("\tBody (JSON): ", "{'controlData': 'X', 'controlCover': 'close', }")
+print('\tBody (Raw>JSON): {"controlData": "X", "controlCover": "OPEN", }')
+print('\tBody (Raw>JSON): {"controlData": "X", "controlCover": "CLOSE", }')
+
 led_internal.value(0)
 
 def getSensorReading():
@@ -59,6 +61,7 @@ def sensorReading(request):
 def ledControl(request):
     try:
         controlDataValue = request.data["controlData"]
+        controlCoverValue = request.data["controlCover"]
         if(controlDataValue == "F"):
             print('C1 State:', 'Occupied')
             led_internal.value(1)
@@ -68,8 +71,8 @@ def ledControl(request):
         elif(controlDataValue == "X"):
             print('C1 State:', 'Service Mode')
             led_internal.value(0)
-            controlOutput("x", "open")
-        print("controlDataStatus: ", controlDataValue)
+            controlOutput(controlDataValue, controlCoverValue)
+        #print("controlDataStatus: ", controlDataValue)
         return json.dumps({"message" : "Command sent successfully!"}), 200, {"Content-Type": "application/json"}
     except:
         pass
@@ -79,18 +82,18 @@ def catchall(request):
     return json.dumps({"message" : "URL not found!"}), 404, {"Content-Type": "application/json"}
 
 def controlOutput(u, d):
-    if(u == "x"):
-        if(d == "open"):
+    if(u == "X"):
+        if(d == "OPEN"):
             print("MSG:", "Opening...")
-            coverControl("forward")
-        elif(d == "close"):
+            coverControl("FORWARD")
+        elif(d == "CLOSE"):
             print("MSG:", "Closing...")
-            coverControl("reverse")
+            coverControl("REVERSE")
 
 def coverControl(c):
-    if(c == "forward"):
+    if(c == "FORWARD"):
         print("MSG:", "Motor Forward.")
-    elif(c == "reverse"):
+    elif(c == "REVERSE"):
         print("MSG:", "Motor Reverse.")
 
 server.run()
