@@ -15,6 +15,19 @@ MY_DEVICE_UID = "mduid-1"
 led_internal = Pin('LED', Pin.OUT)
 led_internal.value(1)
 
+relay_pin1 = 21
+relay_pin2 = 22
+relay_pin3 = 24
+relay_pin4 = 25
+relay_pin5 = 26
+relay_pin6 = 27
+relay_pin1.value(1)
+relay_pin2.value(1)
+relay_pin3.value(1)
+relay_pin4.value(1)
+relay_pin5.value(1)
+relay_pin6.value(1)
+
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
 wlan.connect(WIFI_SSID, WIFI_PASSWORD)
@@ -93,7 +106,13 @@ def controlOutput(u, d):
 def coverControl(c):
     if(c == "FORWARD"):
         print("MSG:", "Motor Forward.")
+        relay_pin1.value(0)
+        relay_pin2.value(1)
+        relay_pin3.value(0)
     elif(c == "REVERSE"):
         print("MSG:", "Motor Reverse.")
+        relay_pin1.value(1)
+        relay_pin2.value(0)
+        relay_pin3.value(0)
 
 server.run()
