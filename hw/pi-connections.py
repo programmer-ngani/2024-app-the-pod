@@ -69,11 +69,11 @@ Table 6. Pin Connection of Raspberry Pi (Pico) and Ultrasonic Sensor Module
 
 Raspberry Pi	Ultrasonic	Voltage	
 Board	Label	Sensor Module	Divider	
-G	GND	US-GND		
-V	5V	US-VCC		
-T		US-TRIG		
+18	GND	US-GND		
+40	5V	US-VCC		
+19		US-TRIG		
 None		US-ECHO		VD-IN
-E				VD-ECHO
-G	GND			VD-GND
+20				VD-ECHO
+23	GND			VD-GND
 
 
