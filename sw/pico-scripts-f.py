@@ -105,6 +105,8 @@ def stateReading(request):
 
 @server.route("/api/set-control-data", methods=["POST"])
 def podControl(request):
+    global controlCoverResponse
+    controlCoverResponse = "NONE"
     try:
         controlDataValue = request.data["controlData"]
         controlCoverValue = request.data["controlCover"]
@@ -122,7 +124,9 @@ def podControl(request):
             controlOutput(controlDataValue, controlCoverValue)
     except:
         pass
-    return json.dumps({"message" : "Command sent successfully!"}), 200, {"Content-Type": "application/json"}
+    stateDict = dict()
+    stateDict["stateData"] = controlCoverResponse
+    return json.dumps(stateDict), 200, {"Content-Type": "application/json"}
 
 @server.catchall()
 def catchall(request):
@@ -164,6 +168,7 @@ def coverControl(c):
             print("MSG (5):", "Solenoid OFF.")
             relay_pin4.value(1)
             print("\tMSG (6):", "Done.")
+            controlCoverResponse = "DONE"
     elif(c == "REVERSE"):
         print("MSG (1):", "Solenoid ON.")
         relay_pin4.value(0)
