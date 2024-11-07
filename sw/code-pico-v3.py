@@ -89,14 +89,16 @@ def stateReading(request):
     stateDataValue = request.data["stateData"]
     # Add ultrasonic code
     if(not getStatusDistance()):
-        if(limit_switch_mtr_u.value() == 0):
+        if(limit_switch_mtr_u.value() == 1):
+            ledControl("OFF")
+        else:
             print("MSG:", "Sensor detected...")
             stateDataValue = "OCCUPIED"
             ledControl("ON")
-        else:
-            ledControl("OFF")
     else:
+        print("MSG:", "Sensor detected...")
         stateDataValue = "OCCUPIED"
+        ledControl("ON")
     stateDict = dict()
     stateDict["stateData"] = stateDataValue
     return json.dumps(stateDict), 200, {"Content-Type": "application/json"}
