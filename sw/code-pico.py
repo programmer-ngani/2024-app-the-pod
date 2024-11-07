@@ -15,23 +15,23 @@ MY_DEVICE_UID = "mduid-1"
 led_internal = Pin('LED', Pin.OUT)
 led_internal.value(1)
 
-relay_pin1 = Pin(21, Pin.OUT)
-relay_pin2 = Pin(22, Pin.OUT)
-relay_pin3 = Pin(23, Pin.OUT)
-relay_pin4 = Pin(25, Pin.OUT)
-relay_pin5 = Pin(26, Pin.OUT)
-relay_pin6 = Pin(27, Pin.OUT)
+relay_pin1 = Pin(16, Pin.OUT)
+relay_pin2 = Pin(17, Pin.OUT)
+relay_pin3 = Pin(18, Pin.OUT)
+relay_pin4 = Pin(19, Pin.OUT)
+relay_pin5 = Pin(20, Pin.OUT)
+relay_pin6 = Pin(21, Pin.OUT)
 relay_pin1.value(1)
 relay_pin2.value(1)
 relay_pin3.value(1)
 relay_pin4.value(1)
 relay_pin5.value(1)
-relay_pin6.value(1)
+relay_pin6.value(1) 
 
-limit_switch_top_l = Pin(9, Pin.IN, Pin.PULL_UP)
-limit_switch_top_r = Pin(10, Pin.IN, Pin.PULL_UP)
-limit_switch_btm_l = Pin(14, Pin.IN, Pin.PULL_UP)
-limit_switch_btm_r = Pin(15, Pin.IN, Pin.PULL_UP)
+limit_switch_top_l = Pin(6, Pin.IN, Pin.PULL_UP)
+limit_switch_top_r = Pin(7, Pin.IN, Pin.PULL_UP)
+limit_switch_btm_l = Pin(10, Pin.IN, Pin.PULL_UP)
+limit_switch_btm_r = Pin(11, Pin.IN, Pin.PULL_UP)
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -111,21 +111,23 @@ def controlOutput(u, d):
 def coverControl(c):
     if(c == "FORWARD"):
         print("MSG:", "Motor Forward.")
-        relay_pin1.value(0)
+        relay_pin1.value(1)
         relay_pin2.value(1)
         relay_pin3.value(0)
-        while(limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
+        while (limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
             pass
-        relay_pin1.value(1)
         relay_pin3.value(1)
+        print("MSG:", "Motor OFF.")
     elif(c == "REVERSE"):
         print("MSG:", "Motor Reverse.")
-        relay_pin1.value(1)
+        relay_pin1.value(0)
         relay_pin2.value(0)
         relay_pin3.value(0)
         while(limit_switch_btm_l.value() == 1 and limit_switch_btm_r.value() == 1):
             pass
+        relay_pin1.value(1)
         relay_pin2.value(1)
         relay_pin3.value(1)
+        print("MSG:", "Motor OFF.")
 
 server.run()
