@@ -88,7 +88,6 @@ def getSensorReading():
 @server.route("/api/get-pod-state", methods=["POST"])
 def stateReading(request):
     stateDataValue = request.data["stateData"]
-    # Add ultrasonic code
     if(not getStatusDistance()):
         if(limit_switch_mtr_u.value() == 1):
             ledControl("OFF")
@@ -114,14 +113,17 @@ def podControl(request):
         if(controlDataValue == "F"):
             print('C1 State:', 'Occupied')
             led_internal.value(1)
+            ledControl("ON")
             controlOutput(controlDataValue, controlCoverValue)
         elif(controlDataValue == "T"):
             print('C1 State:', 'Available')
             led_internal.value(0)
+            ledControl("OFF")
             controlOutput(controlDataValue, controlCoverValue)
         elif(controlDataValue == "X"):
             print('C1 State:', 'Service Mode')
             led_internal.value(0)
+            ledControl("ON")
             controlOutput(controlDataValue, controlCoverValue)
     except:
         pass
@@ -163,6 +165,7 @@ def controlOutput(u, d):
                 print("Close success.")
 
 def getLimitTop():
+    global controlCoverResponse
     if not (limit_switch_top_l.value() == 1 and limit_switch_top_r.value() == 1):
         print("MSG (4):", "Motor OFF.")
         relay_pin3.value(1)
@@ -174,6 +177,7 @@ def getLimitTop():
     return False
 
 def getLimitBtm():
+    global controlCoverResponse
     if not (limit_switch_btm_l.value() == 1 and limit_switch_btm_r.value() == 1):
         print("MSG (4):", "Motor OFF.")
         relay_pin1.value(1)
