@@ -14,10 +14,6 @@ DEFAULT_DNS = secrets.DEFAULT_DNS
 MY_DEVICE_UID = "mduid-1"
 MINIMUM_DISTANCE = 10
 
-# Control flag
-OPEN_THEN_CLOSE = False
-AUTO_CLOSE_DELAY = 15
-
 # Define pin numbers for ultrasonic sensor's TRIG and ECHO pins
 TRIG = Pin(14, machine.Pin.OUT)  # TRIG pin set as output
 ECHO = Pin(15, machine.Pin.IN)  # ECHO pin set as input
@@ -141,49 +137,47 @@ def catchall(request):
     return json.dumps({"message" : "URL not found!"}), 404, {"Content-Type": "application/json"}
 
 def controlOutput(u, d):
-    # Automatic close after preset time.
-    if(u == "X" or u == "T"):
+    if(u == "X"):
         if(d == "OPEN"):
             if not getLimitTop():
-                print("MSG:", "Opening...")
+                print("MSG (7):", "Opening...")
                 coverControl("FORWARD")
             else:
-                print("Open success.")
+                print("\tOpen success.")
         elif(d == "CLOSE"):
             if not getLimitBtm():
-                print("MSG:", "Closing...")
+                print("MSG (7):", "Closing...")
                 coverControl("REVERSE")
             else:
-                print("Close success.")
-        elif(d == "NULL"):
-            if not OPEN_THEN_CLOSE:
-                OPEN_THEN_CLOSE = True
-                while not getLimitTop():
-                    print("MSG (1):", "Opening... for release.")
-                    coverControl("FORWARD")
-                    print("\tOpen success.")
-                print("MSG (2):", "Get within", AUTO_CLOSE_DELAY, "seconds.")
-                time.sleep(AUTO_CLOSE_DELAY)
-                while not getLimitBtm():
-                    print("MSG (3):", "Closing...")
-                    coverControl("REVERSE")
                 print("\tClose success.")
-            else:
-                print("***Device idle.***")
-    elif(u == "F"):
-        OPEN_THEN_CLOSE = False
+    elif(u == "T"):
         if(d == "OPEN"):
             if not getLimitTop():
-                print("MSG:", "Opening...")
+                print("MSG (7):", "Opening...")
                 coverControl("FORWARD")
             else:
-                print("Open success.")
+                print("\tOpen success.")
         elif(d == "CLOSE"):
             if not getLimitBtm():
-                print("MSG:", "Closing...")
+                print("MSG (7):", "Closing... for release. ")
                 coverControl("REVERSE")
             else:
-                print("Close success.")
+                print("\tClose success.")
+        else:
+            print("Note:", "Autoclose in set seconds.")  
+    elif(u == "F"):
+        if(d == "OPEN"):
+            if not getLimitTop():
+                print("MSG (7):", "Opening...")
+                coverControl("FORWARD")
+            else:
+                print("\tOpen success.")
+        elif(d == "CLOSE"):
+            if not getLimitBtm():
+                print("MSG (7):", "Closing...")
+                coverControl("REVERSE")
+            else:
+                print("\tClose success.")
 
 def getLimitTop():
     global controlCoverResponse
