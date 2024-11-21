@@ -14,6 +14,10 @@ DEFAULT_DNS = secrets.DEFAULT_DNS
 MY_DEVICE_UID = "mduid-1"
 MINIMUM_DISTANCE = 10
 
+# Control flag
+OPEN_THEN_CLOSE = False
+AUTO_CLOSE_DELAY = 15
+
 # Define pin numbers for ultrasonic sensor's TRIG and ECHO pins
 TRIG = Pin(14, machine.Pin.OUT)  # TRIG pin set as output
 ECHO = Pin(15, machine.Pin.IN)  # ECHO pin set as input
@@ -59,10 +63,11 @@ print("\nUsage (POST): ", ip + "/api/set-control-data")
 print('\tBody (Raw>JSON): {"controlData": "X", "controlCover": "OPEN", }')
 print('\tBody (Raw>JSON): {"controlData": "X", "controlCover": "CLOSE", }')
 print('\tBody (Raw>JSON): {"controlData": "T", "controlCover": "CLOSE", }')
-# User (Available (Yes): Open or close, Available (No): Open only, )
-print('\tBody (Raw>JSON): {"controlData": "T", "controlCover": "OPEN", }')
-print('\tBody (Raw>JSON): {"controlData": "T", "controlCover": "CLOSE", }')
+# User (Available (No): Open or close,)
 print('\tBody (Raw>JSON): {"controlData": "F", "controlCover": "OPEN", }')
+print('\tBody (Raw>JSON): {"controlData": "F", "controlCover": "CLOSE", }')
+# User (Available (No to Yes): Open then close,)
+print('\tBody (Raw>JSON): {"controlData": "T", "controlCover": "NULL", }')
 # Usage 2
 print("\nUsage (POST): ", ip + "/api/get-pod-state")
 print('\tBody (Raw>JSON): {"stateData": "OCCUPIED", }')
@@ -150,7 +155,23 @@ def controlOutput(u, d):
                 coverControl("REVERSE")
             else:
                 print("Close success.")
+        elif(d == "NULL"):
+            if not OPEN_THEN_CLOSE:
+                OPEN_THEN_CLOSE = True
+                while not getLimitTop():
+                    print("MSG (1):", "Opening... for release.")
+                    coverControl("FORWARD")
+                    print("\tOpen success.")
+                print("MSG (2):", "Get within", AUTO_CLOSE_DELAY, "seconds.")
+                time.sleep(AUTO_CLOSE_DELAY)
+                while not getLimitBtm():
+                    print("MSG (3):", "Closing...")
+                    coverControl("REVERSE")
+                print("\tClose success.")
+            else:
+                print("***Device idle.***")
     elif(u == "F"):
+        OPEN_THEN_CLOSE = False
         if(d == "OPEN"):
             if not getLimitTop():
                 print("MSG:", "Opening...")
